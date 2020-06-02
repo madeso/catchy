@@ -41,6 +41,37 @@ CHECK(StringEq(foo(), "string"));
 CHECK(StringEq(bar(), {"some", "strings"}));
 ```
 
-## vector to string & vector comparission
+## vector equals
 
-todo: write documentation
+Uses false strings, compares arrays
+
+```cpp
+using namespace catchy;
+
+FalseString
+VectorEquals(const std::vector<unsigned int> lhs, const std::vector<unsigned int>& rhs)
+{
+    return VectorEquals
+    (
+        lhs,
+        rhs,
+        [](unsigned int f) -> std::string { return Str() << f; },
+        [](unsigned int a, unsigned int b) -> FalseString
+        {
+            if(a == b)
+            {
+                return FalseString::True();
+            }
+            else
+            {
+                return FalseString::False
+                (
+                    Str() << a << " != " << b
+                );
+            }
+        }
+    );
+}
+
+CHECK(VectorEquals(lhs, rhs));
+```
