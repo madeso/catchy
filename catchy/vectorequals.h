@@ -51,7 +51,7 @@ namespace catchy
 
                 if(!size_equal)
                 {
-                    ss << size_equal.str << ", and first invalid";
+                    ss << size_equal.reason << ", and first invalid";
                 }
                 else
                 {
@@ -71,7 +71,7 @@ namespace catchy
 
                 ss << " value at index ";
                 ss << i << ", "
-                    << equals.str;
+                    << equals.reason;
                 return FalseString::False(ss.str());
             }
         }
