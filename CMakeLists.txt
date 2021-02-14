@@ -36,3 +36,4 @@ target_include_directories(catchy
     external
 )
 
+include(external/Catch.cmake)
