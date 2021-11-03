@@ -59,7 +59,7 @@ MapEq(const std::map<K, V>& lhs, const std::map<K, V>& rhs, const C& compare)
     }
     
     return catchy::FalseString::False(ss.str());
-};
+}
 
 
 }
