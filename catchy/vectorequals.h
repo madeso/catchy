@@ -6,6 +6,8 @@
 #include <functional>
 #include <algorithm>
 
+#include "fmt/format.h"
+
 #include "catchy/falsestring.h"
 #include "catchy/vectortostring.h"
 
@@ -82,6 +84,29 @@ namespace catchy
         }
 
         return FalseString::True();
+    }
+
+    template<typename T>
+    FalseString VectorEquals
+    (
+        const std::vector<T>& lhs,
+        const std::vector<T>& rhs
+    )
+    {
+        return VectorEquals(lhs, rhs,
+            [](const T& t) { return fmt::format("{}", t);},
+            [](const T& l, const T& r) -> FalseString
+            {
+                if(l != r)
+                {
+                    return FalseString::False(fmt::format("{} != {}", l, r));
+                }
+                else
+                {
+                    return FalseString::True();
+                }
+            }
+        );
     }
 }
 
