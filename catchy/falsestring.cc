@@ -17,10 +17,35 @@ namespace catchy
         return {""};
     }
 
+    bool
+    FalseString::IsTrue() const
+    {
+        return reason.empty();
+    }
+
 
     FalseString::operator bool() const
     {
-        return reason.empty();
+        return IsTrue();
+    }
+
+
+    FalseString
+    FalseString::Combine(const FalseString& lhs, const FalseString& rhs)
+    {
+        if(lhs.IsTrue() && rhs.IsTrue()) { return FalseString::True(); }
+
+        if(!lhs.IsTrue() && !rhs.IsTrue())
+        {
+            return FalseString::False( lhs.reason + "\n" + rhs.reason );
+        }
+
+        if( !lhs.IsTrue() ) { return lhs; }
+        else
+        {
+            assert(!rhs.IsTrue());
+            return rhs;
+        }
     }
 
 

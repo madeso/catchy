@@ -17,7 +17,14 @@ namespace catchy
         FalseString
         True();
 
+        bool
+        IsTrue() const;
+
         operator bool() const;
+
+        static
+        FalseString
+        Combine(const FalseString& lhs, const FalseString& rhs);
     
         std::string reason;
     };
