@@ -39,4 +39,7 @@ add_library(catchy STATIC ${catchy_src})
 target_compile_features(catchy PUBLIC cxx_std_17)
 target_include_directories(catchy PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(catchy PUBLIC fmt::fmt catch)
-
+if(NOT MASTER_PROJECT)
+  set_target_properties(catchy PROPERTIES FOLDER "External")
+  set_target_properties(fmt PROPERTIES FOLDER "External")
+endif()
