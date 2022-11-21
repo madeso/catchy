@@ -2,15 +2,15 @@
 cmake_minimum_required(VERSION 3.1.0)
 
 if(${CMAKE_VERSION} VERSION_LESS 3.11)
-  cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
+    cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
 else()
-  cmake_policy(VERSION 3.11)
+    cmake_policy(VERSION 3.11)
 endif()
 
 set(MASTER_PROJECT OFF)
 if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
-  set(MASTER_PROJECT ON)
-  message(STATUS "CMake version: ${CMAKE_VERSION}")
+    set(MASTER_PROJECT ON)
+    message(STATUS "CMake version: ${CMAKE_VERSION}")
 endif ()
 #end copied from fmt lib
 
@@ -24,6 +24,7 @@ target_include_directories(catch
         external/catch
 )
 include(external/catch/Catch.cmake)
+add_library(catch::catch ALIAS catch)
 
 
 set(catchy_src
@@ -38,8 +39,14 @@ source_group("" FILES ${catchy_src})
 add_library(catchy STATIC ${catchy_src})
 target_compile_features(catchy PUBLIC cxx_std_17)
 target_include_directories(catchy PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(catchy PUBLIC fmt::fmt catch)
+target_link_libraries(catchy
+    PUBLIC
+        fmt::fmt
+        catch::catch
+)
 if(NOT MASTER_PROJECT)
   set_target_properties(catchy PROPERTIES FOLDER "External")
   set_target_properties(fmt PROPERTIES FOLDER "External")
 endif()
+add_library(catchy::catchy ALIAS catchy)
+
