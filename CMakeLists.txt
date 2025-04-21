@@ -16,7 +16,7 @@ endif ()
 
 project(catchy CXX)
 
-add_subdirectory(external/fmt-7.1.1)
+add_subdirectory(external/fmt-10.2.1)
 
 add_library(catch INTERFACE)
 target_include_directories(catch
