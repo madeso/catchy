@@ -1,5 +1,6 @@
 #include "catchy/approx.h"
 
+#include <cmath>  // for std::fabs on linux
 
 namespace
 {
