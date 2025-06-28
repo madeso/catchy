@@ -18,13 +18,16 @@ project(catchy CXX)
 
 add_subdirectory(external/fmt-10.2.1)
 
-add_library(catch INTERFACE)
-target_include_directories(catch
-    INTERFACE
-        external/catch
-)
-include(external/catch/Catch.cmake)
-add_library(catch::catch ALIAS catch)
+# set CATCHY_PROVIDE_CATCH to truthy to for catchy to provide catch
+if(MASTER_PROJECT OR CATCHY_PROVIDE_CATCH)
+    add_library(catch INTERFACE)
+    target_include_directories(catch
+        INTERFACE
+            external/catch
+    )
+    include(external/catch/Catch.cmake)
+    add_library(external::catch ALIAS catch)
+endif()
 
 
 set(catchy_src
@@ -42,7 +45,7 @@ target_include_directories(catchy PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(catchy
     PUBLIC
         fmt::fmt
-        catch::catch
+        external::catch
 )
 if(NOT MASTER_PROJECT)
   set_target_properties(catchy PROPERTIES FOLDER "External")

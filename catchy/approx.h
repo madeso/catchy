@@ -1,12 +1,9 @@
-#ifndef CATCHY_APPROX_H
-#define CATCHY_APPROX_H
+#pragma once
 
-#include <cmath>
-#include <sstream>
 #include <limits>
 
-#include "catch.hpp"
-
+#include "catch2/catch_tostring.hpp"
+#include "catch2/internal/catch_reusable_string_stream.hpp"
 
 namespace catchy
 {
@@ -139,4 +136,3 @@ namespace catchy
     }
 }
 
-#endif  // CATCHY_APPROX_H

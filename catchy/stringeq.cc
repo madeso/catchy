@@ -4,10 +4,10 @@
 #include <algorithm>
 #include <string_view>
 
+#include "catch2/catch_tostring.hpp"
 #include "catchy/vectortostring.h"
 #include "catchy/falsestring.h"
 
-#include "catch.hpp"
 
 namespace
 {
